@@ -6,44 +6,41 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
-		AE70ADA92FE9B14F00AC2A4C /* PBXContainerItemProxy */ = {
+		AEF03CD42FE9BFBC009497A0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AE70AD922FE9B14E00AC2A4C /* Project object */;
+			containerPortal = AEF03CBD2FE9BFBB009497A0 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = AE70AD992FE9B14E00AC2A4C;
+			remoteGlobalIDString = AEF03CC42FE9BFBB009497A0;
 			remoteInfo = 15BrushCards;
 		};
-		AE70ADB32FE9B14F00AC2A4C /* PBXContainerItemProxy */ = {
+		AEF03CDE2FE9BFBC009497A0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AE70AD922FE9B14E00AC2A4C /* Project object */;
+			containerPortal = AEF03CBD2FE9BFBB009497A0 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = AE70AD992FE9B14E00AC2A4C;
+			remoteGlobalIDString = AEF03CC42FE9BFBB009497A0;
 			remoteInfo = 15BrushCards;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AE70AD9A2FE9B14E00AC2A4C /* 15BrushCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 15BrushCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AE70ADA82FE9B14F00AC2A4C /* 15BrushCardsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 15BrushCardsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AE70ADB22FE9B14F00AC2A4C /* 15BrushCardsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 15BrushCardsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEF03CC52FE9BFBB009497A0 /* 15BrushCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 15BrushCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEF03CD32FE9BFBC009497A0 /* 15BrushCardsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 15BrushCardsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEF03CDD2FE9BFBC009497A0 /* 15BrushCardsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 15BrushCardsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		AE70AD9C2FE9B14E00AC2A4C /* 15BrushCards */ = {
+		AEF03CC72FE9BFBB009497A0 /* 15BrushCards */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = 15BrushCards;
 			sourceTree = "<group>";
 		};
-		AE70ADAB2FE9B14F00AC2A4C /* 15BrushCardsTests */ = {
+		AEF03CD62FE9BFBC009497A0 /* 15BrushCardsTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = 15BrushCardsTests;
 			sourceTree = "<group>";
 		};
-		AE70ADB52FE9B14F00AC2A4C /* 15BrushCardsUITests */ = {
+		AEF03CE02FE9BFBC009497A0 /* 15BrushCardsUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = 15BrushCardsUITests;
 			sourceTree = "<group>";
@@ -51,21 +48,21 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		AE70AD972FE9B14E00AC2A4C /* Frameworks */ = {
+		AEF03CC22FE9BFBB009497A0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AE70ADA52FE9B14F00AC2A4C /* Frameworks */ = {
+		AEF03CD02FE9BFBC009497A0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AE70ADAF2FE9B14F00AC2A4C /* Frameworks */ = {
+		AEF03CDA2FE9BFBC009497A0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -75,220 +72,157 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AE70AD912FE9B14E00AC2A4C = {
+		AEF03CBC2FE9BFBB009497A0 = {
 			isa = PBXGroup;
 			children = (
-				AE70ADCB2FE9B1D600AC2A4C /* Network */,
-				AE70ADCA2FE9B1D100AC2A4C /* UI */,
-				AE70ADC92FE9B1C900AC2A4C /* Scenes */,
-				AE70ADC82FE9B1C100AC2A4C /* AI */,
-				AE70ADC72FE9B1B900AC2A4C /* Services */,
-				AE70ADC62FE9B1AE00AC2A4C /* Managers */,
-				AE70ADC52FE9B19C00AC2A4C /* Models */,
-				AE70ADAB2FE9B14F00AC2A4C /* 15BrushCardsTests */,
-				AE70ADB52FE9B14F00AC2A4C /* 15BrushCardsUITests */,
-				AE70AD9B2FE9B14E00AC2A4C /* Products */,
-				F30D2E8629170330B40937C1 /* Frameworks */,
+				AEF03CC72FE9BFBB009497A0 /* 15BrushCards */,
+				AEF03CD62FE9BFBC009497A0 /* 15BrushCardsTests */,
+				AEF03CE02FE9BFBC009497A0 /* 15BrushCardsUITests */,
+				AEF03CC62FE9BFBB009497A0 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		AE70AD9B2FE9B14E00AC2A4C /* Products */ = {
+		AEF03CC62FE9BFBB009497A0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AE70AD9A2FE9B14E00AC2A4C /* 15BrushCards.app */,
-				AE70ADA82FE9B14F00AC2A4C /* 15BrushCardsTests.xctest */,
-				AE70ADB22FE9B14F00AC2A4C /* 15BrushCardsUITests.xctest */,
+				AEF03CC52FE9BFBB009497A0 /* 15BrushCards.app */,
+				AEF03CD32FE9BFBC009497A0 /* 15BrushCardsTests.xctest */,
+				AEF03CDD2FE9BFBC009497A0 /* 15BrushCardsUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		AE70ADC52FE9B19C00AC2A4C /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				AE70AD9C2FE9B14E00AC2A4C /* 15BrushCards */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		AE70ADC62FE9B1AE00AC2A4C /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Managers;
-			sourceTree = "<group>";
-		};
-		AE70ADC72FE9B1B900AC2A4C /* Services */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		AE70ADC82FE9B1C100AC2A4C /* AI */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AI;
-			sourceTree = "<group>";
-		};
-		AE70ADC92FE9B1C900AC2A4C /* Scenes */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Scenes;
-			sourceTree = "<group>";
-		};
-		AE70ADCA2FE9B1D100AC2A4C /* UI */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		AE70ADCB2FE9B1D600AC2A4C /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
-			isa = PBXGroup;
-			children = (
-			);
-			sourceTree = "<group>";
-		};
-		F30D2E8629170330B40937C1 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AE70AD992FE9B14E00AC2A4C /* 15BrushCards */ = {
+		AEF03CC42FE9BFBB009497A0 /* 15BrushCards */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AE70ADBC2FE9B14F00AC2A4C /* Build configuration list for PBXNativeTarget "15BrushCards" */;
+			buildConfigurationList = AEF03CE72FE9BFBC009497A0 /* Build configuration list for PBXNativeTarget "15BrushCards" */;
 			buildPhases = (
-				AE70AD962FE9B14E00AC2A4C /* Sources */,
-				AE70AD972FE9B14E00AC2A4C /* Frameworks */,
-				AE70AD982FE9B14E00AC2A4C /* Resources */,
+				AEF03CC12FE9BFBB009497A0 /* Sources */,
+				AEF03CC22FE9BFBB009497A0 /* Frameworks */,
+				AEF03CC32FE9BFBB009497A0 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				AE70AD9C2FE9B14E00AC2A4C /* 15BrushCards */,
+				AEF03CC72FE9BFBB009497A0 /* 15BrushCards */,
 			);
 			name = 15BrushCards;
+			packageProductDependencies = (
+			);
 			productName = 15BrushCards;
-			productReference = AE70AD9A2FE9B14E00AC2A4C /* 15BrushCards.app */;
+			productReference = AEF03CC52FE9BFBB009497A0 /* 15BrushCards.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AE70ADA72FE9B14F00AC2A4C /* 15BrushCardsTests */ = {
+		AEF03CD22FE9BFBC009497A0 /* 15BrushCardsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AE70ADBF2FE9B14F00AC2A4C /* Build configuration list for PBXNativeTarget "15BrushCardsTests" */;
+			buildConfigurationList = AEF03CEA2FE9BFBC009497A0 /* Build configuration list for PBXNativeTarget "15BrushCardsTests" */;
 			buildPhases = (
-				AE70ADA42FE9B14F00AC2A4C /* Sources */,
-				AE70ADA52FE9B14F00AC2A4C /* Frameworks */,
-				AE70ADA62FE9B14F00AC2A4C /* Resources */,
+				AEF03CCF2FE9BFBC009497A0 /* Sources */,
+				AEF03CD02FE9BFBC009497A0 /* Frameworks */,
+				AEF03CD12FE9BFBC009497A0 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				AE70ADAA2FE9B14F00AC2A4C /* PBXTargetDependency */,
+				AEF03CD52FE9BFBC009497A0 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				AE70ADAB2FE9B14F00AC2A4C /* 15BrushCardsTests */,
+				AEF03CD62FE9BFBC009497A0 /* 15BrushCardsTests */,
 			);
 			name = 15BrushCardsTests;
+			packageProductDependencies = (
+			);
 			productName = 15BrushCardsTests;
-			productReference = AE70ADA82FE9B14F00AC2A4C /* 15BrushCardsTests.xctest */;
+			productReference = AEF03CD32FE9BFBC009497A0 /* 15BrushCardsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		AE70ADB12FE9B14F00AC2A4C /* 15BrushCardsUITests */ = {
+		AEF03CDC2FE9BFBC009497A0 /* 15BrushCardsUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AE70ADC22FE9B14F00AC2A4C /* Build configuration list for PBXNativeTarget "15BrushCardsUITests" */;
+			buildConfigurationList = AEF03CED2FE9BFBC009497A0 /* Build configuration list for PBXNativeTarget "15BrushCardsUITests" */;
 			buildPhases = (
-				AE70ADAE2FE9B14F00AC2A4C /* Sources */,
-				AE70ADAF2FE9B14F00AC2A4C /* Frameworks */,
-				AE70ADB02FE9B14F00AC2A4C /* Resources */,
+				AEF03CD92FE9BFBC009497A0 /* Sources */,
+				AEF03CDA2FE9BFBC009497A0 /* Frameworks */,
+				AEF03CDB2FE9BFBC009497A0 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				AE70ADB42FE9B14F00AC2A4C /* PBXTargetDependency */,
+				AEF03CDF2FE9BFBC009497A0 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				AE70ADB52FE9B14F00AC2A4C /* 15BrushCardsUITests */,
+				AEF03CE02FE9BFBC009497A0 /* 15BrushCardsUITests */,
 			);
 			name = 15BrushCardsUITests;
+			packageProductDependencies = (
+			);
 			productName = 15BrushCardsUITests;
-			productReference = AE70ADB22FE9B14F00AC2A4C /* 15BrushCardsUITests.xctest */;
+			productReference = AEF03CDD2FE9BFBC009497A0 /* 15BrushCardsUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		AE70AD922FE9B14E00AC2A4C /* Project object */ = {
+		AEF03CBD2FE9BFBB009497A0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
-					AE70AD992FE9B14E00AC2A4C = {
+					AEF03CC42FE9BFBB009497A0 = {
 						CreatedOnToolsVersion = 16.4;
 					};
-					AE70ADA72FE9B14F00AC2A4C = {
+					AEF03CD22FE9BFBC009497A0 = {
 						CreatedOnToolsVersion = 16.4;
-						TestTargetID = AE70AD992FE9B14E00AC2A4C;
+						TestTargetID = AEF03CC42FE9BFBB009497A0;
 					};
-					AE70ADB12FE9B14F00AC2A4C = {
+					AEF03CDC2FE9BFBC009497A0 = {
 						CreatedOnToolsVersion = 16.4;
-						TestTargetID = AE70AD992FE9B14E00AC2A4C;
+						TestTargetID = AEF03CC42FE9BFBB009497A0;
 					};
 				};
 			};
-			buildConfigurationList = AE70AD952FE9B14E00AC2A4C /* Build configuration list for PBXProject "15BrushCards" */;
+			buildConfigurationList = AEF03CC02FE9BFBB009497A0 /* Build configuration list for PBXProject "15BrushCards" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = AE70AD912FE9B14E00AC2A4C;
+			mainGroup = AEF03CBC2FE9BFBB009497A0;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = AE70AD9B2FE9B14E00AC2A4C /* Products */;
+			productRefGroup = AEF03CC62FE9BFBB009497A0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AE70AD992FE9B14E00AC2A4C /* 15BrushCards */,
-				AE70ADA72FE9B14F00AC2A4C /* 15BrushCardsTests */,
-				AE70ADB12FE9B14F00AC2A4C /* 15BrushCardsUITests */,
+				AEF03CC42FE9BFBB009497A0 /* 15BrushCards */,
+				AEF03CD22FE9BFBC009497A0 /* 15BrushCardsTests */,
+				AEF03CDC2FE9BFBC009497A0 /* 15BrushCardsUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		AE70AD982FE9B14E00AC2A4C /* Resources */ = {
+		AEF03CC32FE9BFBB009497A0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AE70ADA62FE9B14F00AC2A4C /* Resources */ = {
+		AEF03CD12FE9BFBC009497A0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AE70ADB02FE9B14F00AC2A4C /* Resources */ = {
+		AEF03CDB2FE9BFBC009497A0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -297,59 +231,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			showEnvVarsInLog = 0;
-		};
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		AE70AD962FE9B14E00AC2A4C /* Sources */ = {
+		AEF03CC12FE9BFBB009497A0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AE70ADA42FE9B14F00AC2A4C /* Sources */ = {
+		AEF03CCF2FE9BFBC009497A0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AE70ADAE2FE9B14F00AC2A4C /* Sources */ = {
+		AEF03CD92FE9BFBC009497A0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -359,20 +256,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		AE70ADAA2FE9B14F00AC2A4C /* PBXTargetDependency */ = {
+		AEF03CD52FE9BFBC009497A0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AE70AD992FE9B14E00AC2A4C /* 15BrushCards */;
-			targetProxy = AE70ADA92FE9B14F00AC2A4C /* PBXContainerItemProxy */;
+			target = AEF03CC42FE9BFBB009497A0 /* 15BrushCards */;
+			targetProxy = AEF03CD42FE9BFBC009497A0 /* PBXContainerItemProxy */;
 		};
-		AE70ADB42FE9B14F00AC2A4C /* PBXTargetDependency */ = {
+		AEF03CDF2FE9BFBC009497A0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AE70AD992FE9B14E00AC2A4C /* 15BrushCards */;
-			targetProxy = AE70ADB32FE9B14F00AC2A4C /* PBXContainerItemProxy */;
+			target = AEF03CC42FE9BFBB009497A0 /* 15BrushCards */;
+			targetProxy = AEF03CDE2FE9BFBC009497A0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		AE70ADBA2FE9B14F00AC2A4C /* Debug */ = {
+		AEF03CE52FE9BFBC009497A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -434,7 +331,7 @@
 			};
 			name = Debug;
 		};
-		AE70ADBB2FE9B14F00AC2A4C /* Release */ = {
+		AEF03CE62FE9BFBC009497A0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -488,12 +385,11 @@
 			};
 			name = Release;
 		};
-		AE70ADBD2FE9B14F00AC2A4C /* Debug */ = {
+		AEF03CE82FE9BFBC009497A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 35H96C379A;
@@ -527,12 +423,11 @@
 			};
 			name = Debug;
 		};
-		AE70ADBE2FE9B14F00AC2A4C /* Release */ = {
+		AEF03CE92FE9BFBC009497A0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 35H96C379A;
@@ -566,7 +461,7 @@
 			};
 			name = Release;
 		};
-		AE70ADC02FE9B14F00AC2A4C /* Debug */ = {
+		AEF03CEB2FE9BFBC009497A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -589,7 +484,7 @@
 			};
 			name = Debug;
 		};
-		AE70ADC12FE9B14F00AC2A4C /* Release */ = {
+		AEF03CEC2FE9BFBC009497A0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -612,7 +507,7 @@
 			};
 			name = Release;
 		};
-		AE70ADC32FE9B14F00AC2A4C /* Debug */ = {
+		AEF03CEE2FE9BFBC009497A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -634,7 +529,7 @@
 			};
 			name = Debug;
 		};
-		AE70ADC42FE9B14F00AC2A4C /* Release */ = {
+		AEF03CEF2FE9BFBC009497A0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -659,43 +554,43 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AE70AD952FE9B14E00AC2A4C /* Build configuration list for PBXProject "15BrushCards" */ = {
+		AEF03CC02FE9BFBB009497A0 /* Build configuration list for PBXProject "15BrushCards" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AE70ADBA2FE9B14F00AC2A4C /* Debug */,
-				AE70ADBB2FE9B14F00AC2A4C /* Release */,
+				AEF03CE52FE9BFBC009497A0 /* Debug */,
+				AEF03CE62FE9BFBC009497A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AE70ADBC2FE9B14F00AC2A4C /* Build configuration list for PBXNativeTarget "15BrushCards" */ = {
+		AEF03CE72FE9BFBC009497A0 /* Build configuration list for PBXNativeTarget "15BrushCards" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AE70ADBD2FE9B14F00AC2A4C /* Debug */,
-				AE70ADBE2FE9B14F00AC2A4C /* Release */,
+				AEF03CE82FE9BFBC009497A0 /* Debug */,
+				AEF03CE92FE9BFBC009497A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AE70ADBF2FE9B14F00AC2A4C /* Build configuration list for PBXNativeTarget "15BrushCardsTests" */ = {
+		AEF03CEA2FE9BFBC009497A0 /* Build configuration list for PBXNativeTarget "15BrushCardsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AE70ADC02FE9B14F00AC2A4C /* Debug */,
-				AE70ADC12FE9B14F00AC2A4C /* Release */,
+				AEF03CEB2FE9BFBC009497A0 /* Debug */,
+				AEF03CEC2FE9BFBC009497A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AE70ADC22FE9B14F00AC2A4C /* Build configuration list for PBXNativeTarget "15BrushCardsUITests" */ = {
+		AEF03CED2FE9BFBC009497A0 /* Build configuration list for PBXNativeTarget "15BrushCardsUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AE70ADC32FE9B14F00AC2A4C /* Debug */,
-				AE70ADC42FE9B14F00AC2A4C /* Release */,
+				AEF03CEE2FE9BFBC009497A0 /* Debug */,
+				AEF03CEF2FE9BFBC009497A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = AE70AD922FE9B14E00AC2A4C /* Project object */;
+	rootObject = AEF03CBD2FE9BFBB009497A0 /* Project object */;
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct BrushCardsApp: App {
+struct _5BrushCardsApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
