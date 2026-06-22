@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23405B9400BD11BE5960DA08 /* libPods-15BrushCards.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC7B49BAA8E9D2A60BA097A /* libPods-15BrushCards.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,9 +28,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		71CDD6FD501ED3AD8A1A9D79 /* Pods-15BrushCards.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-15BrushCards.debug.xcconfig"; path = "Target Support Files/Pods-15BrushCards/Pods-15BrushCards.debug.xcconfig"; sourceTree = "<group>"; };
+		8C6A0FA13BF803D4B69DBA31 /* Pods-15BrushCards.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-15BrushCards.release.xcconfig"; path = "Target Support Files/Pods-15BrushCards/Pods-15BrushCards.release.xcconfig"; sourceTree = "<group>"; };
 		AE70AD9A2FE9B14E00AC2A4C /* 15BrushCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 15BrushCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE70ADA82FE9B14F00AC2A4C /* 15BrushCardsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 15BrushCardsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE70ADB22FE9B14F00AC2A4C /* 15BrushCardsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 15BrushCardsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAC7B49BAA8E9D2A60BA097A /* libPods-15BrushCards.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-15BrushCards.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -55,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23405B9400BD11BE5960DA08 /* libPods-15BrushCards.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +93,7 @@
 				AE70ADAB2FE9B14F00AC2A4C /* 15BrushCardsTests */,
 				AE70ADB52FE9B14F00AC2A4C /* 15BrushCardsUITests */,
 				AE70AD9B2FE9B14E00AC2A4C /* Products */,
+				CDC02A62AE6705A0CC94E447 /* Pods */,
 				F30D2E8629170330B40937C1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -152,14 +158,20 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		CDC02A62AE6705A0CC94E447 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				71CDD6FD501ED3AD8A1A9D79 /* Pods-15BrushCards.debug.xcconfig */,
+				8C6A0FA13BF803D4B69DBA31 /* Pods-15BrushCards.release.xcconfig */,
 			);
+			name = Pods;
+			path = ../Pods;
 			sourceTree = "<group>";
 		};
 		F30D2E8629170330B40937C1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FAC7B49BAA8E9D2A60BA097A /* libPods-15BrushCards.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -171,9 +183,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AE70ADBC2FE9B14F00AC2A4C /* Build configuration list for PBXNativeTarget "15BrushCards" */;
 			buildPhases = (
+				54492A8A95052F8C2182AF7D /* [CP] Check Pods Manifest.lock */,
 				AE70AD962FE9B14E00AC2A4C /* Sources */,
 				AE70AD972FE9B14E00AC2A4C /* Frameworks */,
 				AE70AD982FE9B14E00AC2A4C /* Resources */,
+				5C351ADFE5A57F3535DED738 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -298,6 +312,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		54492A8A95052F8C2182AF7D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -308,28 +323,36 @@
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-15BrushCards-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5C351ADFE5A57F3535DED738 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-15BrushCards/Pods-15BrushCards-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			inputPaths = (
 			);
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-15BrushCards/Pods-15BrushCards-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-15BrushCards/Pods-15BrushCards-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -490,6 +513,7 @@
 		};
 		AE70ADBD2FE9B14F00AC2A4C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 71CDD6FD501ED3AD8A1A9D79 /* Pods-15BrushCards.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -529,6 +553,7 @@
 		};
 		AE70ADBE2FE9B14F00AC2A4C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C6A0FA13BF803D4B69DBA31 /* Pods-15BrushCards.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

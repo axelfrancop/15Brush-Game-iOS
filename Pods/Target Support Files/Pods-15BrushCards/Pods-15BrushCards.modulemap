@@ -1,6 +1,0 @@
-module Pods_15BrushCards {
-  umbrella header "Pods-15BrushCards-umbrella.h"
-
-  export *
-  module * { export * }
-}
