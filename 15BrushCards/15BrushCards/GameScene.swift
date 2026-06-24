@@ -116,10 +116,11 @@ class GameScene: SKScene {
     }
 
     private func drawGameBoard() {
-        let boardBackground = SKShapeNode(rectOf: frame.size)
+        let boardBackground = SKShapeNode(rectOf: CGSize(width: frame.width * 2, height: frame.height * 2))
         boardBackground.fillColor = SKColor(red: 0.1, green: 0.5, blue: 0.1, alpha: 1.0)
         boardBackground.strokeColor = .clear
         boardBackground.zPosition = -1
+        boardBackground.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(boardBackground)
 
         let borderColor = SKColor(red: 0.05, green: 0.3, blue: 0.05, alpha: 1.0)
