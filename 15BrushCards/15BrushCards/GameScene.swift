@@ -32,7 +32,21 @@ class GameScene: SKScene {
     private var playButton: SKShapeNode?
     private var cancelButton: SKShapeNode?
 
+    private var aiName: String = "IA"
+
     private let cardSize = CGSize(width: 60, height: 90)
+    private let scientistNames = [
+        "Albert Einstein",
+        "Isaac Newton",
+        "Marie Curie",
+        "Galileo Galilei",
+        "Charles Darwin",
+        "Nikola Tesla",
+        "Carl Sagan",
+        "Stephen Hawking",
+        "Niels Bohr",
+        "Emmy Noether"
+    ]
     private let spacing: CGFloat = 20
     private var deckCards: [String] = Array(repeating: "card", count: 40)
     private var isGameOver = false
@@ -47,6 +61,7 @@ class GameScene: SKScene {
 
     override func didMove(to view: SKView) {
         backgroundColor = .darkGray
+        aiName = scientistNames.randomElement() ?? "IA"
         drawGame()
     }
 
@@ -145,7 +160,7 @@ class GameScene: SKScene {
         }
 
         let aiLabel = SKLabelNode(fontNamed: "Arial")
-        aiLabel.text = "Cartas da IA"
+        aiLabel.text = "Cartas de \(aiName)"
         aiLabel.fontSize = 10
         aiLabel.fontColor = .blue
         aiLabel.position = CGPoint(x: frame.midX, y: frame.maxY - 130)
@@ -214,7 +229,7 @@ class GameScene: SKScene {
         turnLabel = SKLabelNode(fontNamed: "Arial")
         turnLabel?.fontSize = 14
         turnLabel?.fontColor = isPlayerTurn ? .green : .red
-        turnLabel?.text = isPlayerTurn ? "SEU TURNO" : "TURNO DA IA"
+        turnLabel?.text = isPlayerTurn ? "SEU TURNO" : "TURNO DE \(aiName.uppercased())"
         turnLabel?.position = CGPoint(x: frame.midX, y: frame.maxY - 70)
         turnLabel?.zPosition = 1
 
@@ -233,7 +248,7 @@ class GameScene: SKScene {
                 drawSkipButton()
             }
         } else {
-            messageLabel?.text = "IA jogando..."
+            messageLabel?.text = "\(aiName) jogando..."
         }
 
         messageLabel?.position = CGPoint(x: frame.midX, y: frame.maxY - 95)
@@ -386,7 +401,7 @@ class GameScene: SKScene {
 
         calculateFinalScores()
 
-        let winner = playerScore > aiScore ? "VOCÊ VENCEU! 🎉" : "IA VENCEU! 🤖"
+        let winner = playerScore > aiScore ? "VOCÊ VENCEU! 🎉" : "\(aiName.uppercased()) VENCEU! 🤖"
         let winnerColor: SKColor = playerScore > aiScore ? .green : .red
 
         gameOverLabel?.removeFromParent()
