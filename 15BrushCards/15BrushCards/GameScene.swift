@@ -193,7 +193,7 @@ class GameScene: SKScene {
         playButton?.fillColor = .green
         playButton?.strokeColor = .white
         playButton?.lineWidth = 2
-        playButton?.position = CGPoint(x: frame.midX - 60, y: frame.minY + 150)
+        playButton?.position = CGPoint(x: frame.midX - 60, y: frame.minY + 220)
         playButton?.zPosition = 50
         playButton?.name = "play_button"
 
@@ -211,7 +211,7 @@ class GameScene: SKScene {
         cancelButton?.fillColor = .red
         cancelButton?.strokeColor = .darkGray
         cancelButton?.lineWidth = 2
-        cancelButton?.position = CGPoint(x: frame.midX + 60, y: frame.minY + 150)
+        cancelButton?.position = CGPoint(x: frame.midX + 60, y: frame.minY + 220)
         cancelButton?.zPosition = 50
         cancelButton?.name = "cancel_button"
 
@@ -270,7 +270,7 @@ class GameScene: SKScene {
         playButton?.fillColor = .orange
         playButton?.strokeColor = .white
         playButton?.lineWidth = 2
-        playButton?.position = CGPoint(x: frame.midX, y: frame.minY + 150)
+        playButton?.position = CGPoint(x: frame.midX, y: frame.minY + 220)
         playButton?.zPosition = 50
         playButton?.name = "skip_button"
 
