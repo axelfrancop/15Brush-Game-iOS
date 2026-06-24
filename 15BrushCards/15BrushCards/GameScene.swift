@@ -64,6 +64,14 @@ class GameScene: SKScene {
     }
 
     private func drawTableCards() {
+        let tableLabel = SKLabelNode(fontNamed: "Arial")
+        tableLabel.text = "MESA"
+        tableLabel.fontSize = 12
+        tableLabel.fontColor = .white
+        tableLabel.position = CGPoint(x: frame.midX, y: frame.midY + 60)
+        tableLabel.zPosition = 1
+        addChild(tableLabel)
+
         let startX = frame.midX - CGFloat(tableCardValues.count - 1) * (cardSize.width + spacing) / 2
         let startY = frame.midY
 
@@ -82,6 +90,14 @@ class GameScene: SKScene {
     }
 
     private func drawPlayerHand() {
+        let handLabel = SKLabelNode(fontNamed: "Arial")
+        handLabel.text = "SUA MÃO"
+        handLabel.fontSize = 12
+        handLabel.fontColor = .white
+        handLabel.position = CGPoint(x: frame.midX, y: frame.minY + 140)
+        handLabel.zPosition = 1
+        addChild(handLabel)
+
         let startX = frame.midX - CGFloat(playerHandValues.count - 1) * (cardSize.width + spacing) / 2
         let startY = frame.minY + 80
 
