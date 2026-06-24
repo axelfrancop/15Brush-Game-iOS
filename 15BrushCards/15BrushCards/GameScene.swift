@@ -24,6 +24,9 @@ class GameScene: SKScene {
     private var aiScore = 0
     private var lastPlayerToCollect: String = "player"
 
+    private var playerBrushCount = 0
+    private var aiBrushCount = 0
+
     private var isPlayerTurn = true
     private var isAnimating = false
     private var messageLabel: SKLabelNode?
@@ -340,6 +343,11 @@ class GameScene: SKScene {
         aiCollectedCards.append(contentsOf: collectedCardIds)
         lastPlayerToCollect = "ai"
 
+        if tableCardValues.isEmpty {
+            aiBrushCount += 1
+            showBrushAlert(for: aiName)
+        }
+
         replenishTable()
 
         isAnimating = false
@@ -513,6 +521,11 @@ class GameScene: SKScene {
         playerCollectedCards.append(contentsOf: collectedCardIds)
         lastPlayerToCollect = "player"
 
+        if tableCardValues.isEmpty {
+            playerBrushCount += 1
+            showBrushAlert(for: "Você")
+        }
+
         replenishTable()
 
         selectedHandCard = nil
@@ -596,6 +609,44 @@ class GameScene: SKScene {
         updateMessage("Clique em uma carta")
     }
 
+    private func countRedCards(_ cards: [String]) -> Int {
+        var count = 0
+        for card in cards {
+            if let naipe = cardNaipes[card] {
+                if naipe == "O" || naipe == "C" {
+                    count += 1
+                }
+            }
+        }
+        return count
+    }
+
+    private func showBrushAlert(for player: String) {
+        let brushLabel = SKLabelNode(fontNamed: "Arial")
+        brushLabel.text = "🎉 BRUSH! 🎉"
+        brushLabel.fontSize = 48
+        brushLabel.fontColor = .yellow
+        brushLabel.position = CGPoint(x: frame.midX, y: frame.midY + 100)
+        brushLabel.zPosition = 150
+        brushLabel.name = "brush_alert"
+        addChild(brushLabel)
+
+        let playerLabel = SKLabelNode(fontNamed: "Arial")
+        playerLabel.text = "\(player) levantou a mesa!"
+        playerLabel.fontSize = 20
+        playerLabel.fontColor = .white
+        playerLabel.position = CGPoint(x: frame.midX, y: frame.midY + 40)
+        playerLabel.zPosition = 150
+        addChild(playerLabel)
+
+        let scaleUp = SKAction.scale(to: 1.2, duration: 0.3)
+        let scaleDown = SKAction.scale(to: 0.8, duration: 0.3)
+        let fade = SKAction.fadeOut(withDuration: 1.0)
+        let sequence = SKAction.sequence([scaleUp, scaleDown, fade])
+
+        brushLabel.run(sequence) { brushLabel.removeFromParent() }
+    }
+
     private func calculateFinalScores() {
         playerScore = 0
         aiScore = 0
@@ -618,21 +669,14 @@ class GameScene: SKScene {
         if lastPlayerToCollect == "player" { playerScore += 1 }
         else if lastPlayerToCollect == "ai" { aiScore += 1 }
 
+        // Regra 5: BRUSH (Escova) = 1 ponto cada
+        playerScore += playerBrushCount
+        aiScore += aiBrushCount
+
         print("SCORE: Player=\(playerScore), AI=\(aiScore)")
         print("DETAILS: Player Red=\(countRedCards(playerCollectedCards)), AI Red=\(countRedCards(aiCollectedCards))")
         print("DETAILS: Player Cards=\(playerCollectedCards.count), AI Cards=\(aiCollectedCards.count)")
         print("DETAILS: Last Player=\(lastPlayerToCollect)")
-    }
-
-    private func countRedCards(_ cards: [String]) -> Int {
-        var count = 0
-        for card in cards {
-            if let naipe = cardNaipes[card] {
-                if naipe == "O" || naipe == "C" {
-                    count += 1
-                }
-            }
-        }
-        return count
+        print("DETAILS: Player Brushes=\(playerBrushCount), AI Brushes=\(aiBrushCount)")
     }
 }
