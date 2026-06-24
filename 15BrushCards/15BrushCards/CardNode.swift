@@ -1,6 +1,6 @@
 import SpriteKit
 
-class CardNode: SKShapeNode {
+class CardNode: SKSpriteNode {
     let cardId: String
     let cardDisplay: String
     var isSelected = false
@@ -8,22 +8,19 @@ class CardNode: SKShapeNode {
     init(cardId: String, display: String, size: CGSize) {
         self.cardId = cardId
         self.cardDisplay = display
+        super.init(texture: nil, color: .white, size: size)
 
-        super.init()
-
-        let rect = CGRect(x: -size.width / 2, y: -size.height / 2, width: size.width, height: size.height)
-        path = UIBezierPath(roundedRect: rect, cornerRadius: 8).cgPath
-        fillColor = .white
+        name = cardId
         strokeColor = .black
         lineWidth = 2
-        name = cardId
+        zPosition = 5
 
         let label = SKLabelNode(fontNamed: "Arial")
         label.text = display
         label.fontSize = 20
         label.fontColor = .black
         label.position = CGPoint(x: 0, y: 0)
-        label.zPosition = 1
+        label.zPosition = 10
         addChild(label)
     }
 
