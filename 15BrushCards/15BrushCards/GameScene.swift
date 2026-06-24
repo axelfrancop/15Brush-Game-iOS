@@ -476,18 +476,38 @@ class GameScene: SKScene {
             return
         }
 
-        if let playBtn = playButton, playBtn.contains(position) {
-            if playBtn.name == "skip_button" {
-                skipPlayerTurn()
-            } else if lastMoveSum == 15 && selectedHandCard != nil && !selectedCards.isEmpty {
-                executePlayerMove(handCard: selectedHandCard!, tableCards: selectedCards)
+        if let playBtn = playButton {
+            let buttonSize = CGSize(width: 80, height: 40)
+            let buttonRect = CGRect(
+                x: playBtn.position.x - buttonSize.width / 2,
+                y: playBtn.position.y - buttonSize.height / 2,
+                width: buttonSize.width,
+                height: buttonSize.height
+            )
+
+            if buttonRect.contains(position) {
+                if playBtn.name == "skip_button" {
+                    skipPlayerTurn()
+                } else if lastMoveSum == 15 && selectedHandCard != nil && !selectedCards.isEmpty {
+                    executePlayerMove(handCard: selectedHandCard!, tableCards: selectedCards)
+                }
+                return
             }
-            return
         }
 
-        if let cancelBtn = cancelButton, cancelBtn.contains(position) {
-            cancelSelection()
-            return
+        if let cancelBtn = cancelButton {
+            let buttonSize = CGSize(width: 100, height: 40)
+            let buttonRect = CGRect(
+                x: cancelBtn.position.x - buttonSize.width / 2,
+                y: cancelBtn.position.y - buttonSize.height / 2,
+                width: buttonSize.width,
+                height: buttonSize.height
+            )
+
+            if buttonRect.contains(position) {
+                cancelSelection()
+                return
+            }
         }
 
         for cardNode in cardNodes {
