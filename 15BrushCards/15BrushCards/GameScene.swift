@@ -275,7 +275,7 @@ class GameScene: SKScene {
             messageLabel?.text = "\(aiName) jogando..."
         }
 
-        messageLabel?.position = CGPoint(x: frame.midX, y: frame.maxY - 95)
+        messageLabel?.position = CGPoint(x: frame.midX, y: frame.maxY - 30)
         messageLabel?.zPosition = 1
 
         if let label = messageLabel { addChild(label) }
