@@ -11,14 +11,9 @@ struct GameView: View {
     }
 
     var body: some View {
-        ZStack {
-            SpriteView(scene: scene)
-                .ignoresSafeArea()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-        .onAppear {
-            scene.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        }
+        SpriteView(scene: scene)
+            .ignoresSafeArea()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

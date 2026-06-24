@@ -1,4 +1,5 @@
 import SpriteKit
+import Foundation
 
 class GameScene: SKScene {
     private var cardNodes: [CardNode] = []
@@ -90,17 +91,6 @@ class GameScene: SKScene {
         if let label = messageLabel { addChild(label) }
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        let location = touch.location(in: self)
-
-        for cardNode in cardNodes {
-            if cardNode.contains(location) {
-                handleCardTap(cardNode)
-                break
-            }
-        }
-    }
 
     private func handleCardTap(_ cardNode: CardNode) {
         let isHandCard = cardNode.name?.starts(with: "hand_") ?? false
