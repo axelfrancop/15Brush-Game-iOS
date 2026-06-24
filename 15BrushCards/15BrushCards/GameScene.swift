@@ -467,6 +467,7 @@ class GameScene: SKScene {
         messageLabel?.text = text
     }
 
+
     func handleSceneTap(at position: CGPoint) {
         guard !isAnimating else { return }
 
