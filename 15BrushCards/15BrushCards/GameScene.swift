@@ -140,25 +140,6 @@ class GameScene: SKScene {
         innerBorder.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(innerBorder)
 
-        for i in 0..<4 {
-            let cornerSize: CGFloat = 40
-            let corner = SKShapeNode(circleOfRadius: cornerSize / 2)
-            corner.fillColor = SKColor(red: 0.05, green: 0.25, blue: 0.05, alpha: 0.8)
-            corner.strokeColor = SKColor(red: 0.2, green: 0.6, blue: 0.2, alpha: 0.6)
-            corner.lineWidth = 2
-            corner.zPosition = -1
-
-            let positions = [
-                CGPoint(x: frame.minX + 30, y: frame.maxY - 30),
-                CGPoint(x: frame.maxX - 30, y: frame.maxY - 30),
-                CGPoint(x: frame.minX + 30, y: frame.minY + 30),
-                CGPoint(x: frame.maxX - 30, y: frame.minY + 30)
-            ]
-
-            corner.position = positions[i]
-            addChild(corner)
-        }
-
         for x in stride(from: frame.minX + 80, through: frame.maxX - 80, by: 100) {
             let dot = SKShapeNode(circleOfRadius: 3)
             dot.fillColor = SKColor(red: 0.2, green: 0.6, blue: 0.2, alpha: 0.4)
