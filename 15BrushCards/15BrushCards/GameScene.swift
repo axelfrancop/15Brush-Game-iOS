@@ -180,6 +180,11 @@ class GameScene: SKScene {
             cardNode.zPosition = 10
             addChild(cardNode)
             cardNodes.append(cardNode)
+
+            let delay = TimeInterval(index) * 0.08
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                cardNode.animateFlip(duration: 0.35)
+            }
         }
     }
 
@@ -207,6 +212,11 @@ class GameScene: SKScene {
             cardNode.name = "hand_\(index)"
             addChild(cardNode)
             cardNodes.append(cardNode)
+
+            let delay = TimeInterval(index) * 0.08
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                cardNode.animateFlip(duration: 0.35)
+            }
         }
     }
 
@@ -225,6 +235,11 @@ class GameScene: SKScene {
             cardNode.zPosition = 5
             cardNode.color = .blue
             addChild(cardNode)
+
+            let delay = TimeInterval(index) * 0.08
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                cardNode.animateFlip(duration: 0.35)
+            }
         }
 
         let aiLabel = SKLabelNode(fontNamed: "Arial")
