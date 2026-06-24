@@ -707,6 +707,15 @@ class GameScene: SKScene {
     }
 
     private func calculateFinalScores() {
+        // Distribuir cartas restantes na mão para quem fez a última coleta
+        if lastPlayerToCollect == "player" {
+            playerCollectedCards.append(contentsOf: playerHandValues)
+            playerCollectedCards.append(contentsOf: aiHandValues)
+        } else {
+            aiCollectedCards.append(contentsOf: playerHandValues)
+            aiCollectedCards.append(contentsOf: aiHandValues)
+        }
+
         playerScore = 0
         aiScore = 0
 
