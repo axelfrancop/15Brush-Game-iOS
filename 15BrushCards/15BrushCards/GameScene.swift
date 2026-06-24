@@ -13,9 +13,9 @@ class GameScene: SKScene {
         return !moves.isEmpty
     }
 
-    private var tableCardValues: [String] = ["4", "2", "9", "6"]
-    private var playerHandValues: [String] = ["7", "8", "9"]
-    private var aiHandValues: [String] = ["5", "6", "10"]
+    private var tableCardValues: [String] = []
+    private var playerHandValues: [String] = []
+    private var aiHandValues: [String] = []
 
     private var playerCollectedCards: [String] = []
     private var aiCollectedCards: [String] = []
@@ -65,7 +65,27 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         backgroundColor = .darkGray
         aiName = scientistNames.randomElement() ?? "IA"
+        initializeDeck()
         drawGame()
+    }
+
+    private func initializeDeck() {
+        var deck: [String] = []
+
+        for value in 1...10 {
+            for _ in 0..<4 {
+                deck.append(String(value))
+            }
+        }
+
+        deck.shuffle()
+
+        tableCardValues = Array(deck[0..<4])
+        playerHandValues = Array(deck[4..<7])
+        aiHandValues = Array(deck[7..<10])
+        deckCards = Array(deck[10...])
+
+        print("DECK INITIALIZED: Table=\(tableCardValues), Player=\(playerHandValues), AI=\(aiHandValues), Remaining=\(deckCards.count)")
     }
 
     private func drawGame() {
