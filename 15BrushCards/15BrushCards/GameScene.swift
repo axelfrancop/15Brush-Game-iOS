@@ -467,21 +467,33 @@ class GameScene: SKScene {
         messageLabel?.text = text
     }
 
-    func handleGameOverTap() {
+    func handleSceneTap(at position: CGPoint) {
+        guard !isAnimating else { return }
+
         if isGameOver {
             onGameOver?()
+            return
         }
-    }
 
-    func handleButtonTap(at position: CGPoint) {
         if let playBtn = playButton, playBtn.contains(position) {
             if playBtn.name == "skip_button" {
                 skipPlayerTurn()
             } else if lastMoveSum == 15 && selectedHandCard != nil && !selectedCards.isEmpty {
                 executePlayerMove(handCard: selectedHandCard!, tableCards: selectedCards)
             }
-        } else if let cancelBtn = cancelButton, cancelBtn.contains(position) {
+            return
+        }
+
+        if let cancelBtn = cancelButton, cancelBtn.contains(position) {
             cancelSelection()
+            return
+        }
+
+        for cardNode in cardNodes {
+            if cardNode.contains(position) {
+                handleCardTap(cardNode)
+                return
+            }
         }
     }
 

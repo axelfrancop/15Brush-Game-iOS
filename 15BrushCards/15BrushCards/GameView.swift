@@ -17,40 +17,28 @@ struct GameView: View {
                 .ignoresSafeArea()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-            InteractiveCardOverlay(scene: scene)
+            GeometryReader { geometry in
+                Color.clear
+                    .contentShape(Rectangle())
+                    .onTapGesture { location in
+                        let sceneHeight = scene.size.height
+                        let sceneWidth = scene.size.width
+                        let viewHeight = geometry.size.height
+                        let viewWidth = geometry.size.width
+
+                        let scaleX = sceneWidth / viewWidth
+                        let scaleY = sceneHeight / viewHeight
+
+                        let sceneX = location.x * scaleX
+                        let sceneY = (viewHeight - location.y) * scaleY
+
+                        scene.handleSceneTap(at: CGPoint(x: sceneX, y: sceneY))
+                    }
+            }
         }
         .onAppear {
             scene.onGameOver = {
                 dismiss()
-            }
-        }
-    }
-}
-
-struct InteractiveCardOverlay: View {
-    let scene: GameScene
-
-    var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                Color.clear
-                    .contentShape(Rectangle())
-                    .onTapGesture { location in
-                        let sceneSize = geometry.size
-                        let sceneLoc = CGPoint(x: location.x, y: sceneSize.height - location.y)
-
-                        scene.handleButtonTap(at: sceneLoc)
-                        scene.handleGameOverTap()
-                    }
-
-                ForEach(scene.cardNodes, id: \.cardId) { cardNode in
-                    Color.clear
-                        .frame(width: 60, height: 90)
-                        .position(x: cardNode.position.x, y: cardNode.position.y)
-                        .onTapGesture {
-                            scene.handleCardTap(cardNode)
-                        }
-                }
             }
         }
     }
