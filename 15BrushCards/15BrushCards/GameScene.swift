@@ -95,10 +95,11 @@ class GameScene: SKScene {
         selectedHandCards.removeAll()
 
         let title = SKLabelNode(fontNamed: "Arial")
-        title.text = "15 Brush Cards"
+        title.text = "15 Brush Game"
         title.fontSize = 28
         title.fontColor = .white
-        title.position = CGPoint(x: frame.midX, y: frame.maxY - 40)
+        title.alpha = 0.5
+        title.position = CGPoint(x: frame.midX, y: frame.maxY - 250)
         addChild(title)
 
         drawTableCards()
