@@ -23,7 +23,7 @@ struct ContentView: View {
             .ignoresSafeArea()
 
             if showSpriteKit {
-                GamePlayView()
+                GameView()
             } else if !gameStarted {
                 menuView
             } else {
