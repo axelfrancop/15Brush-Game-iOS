@@ -3,8 +3,8 @@ import Foundation
 
 class GameScene: SKScene {
     var cardNodes: [CardNode] = []
-    private var selectedCards: [CardNode] = []
-    private var selectedHandCard: CardNode?
+    private var selectedTableCards: [CardNode] = []
+    private var selectedHandCards: [CardNode] = []
     var onGameOver: (() -> Void)?
 
     private var hasValidMoves: Bool {
@@ -91,8 +91,8 @@ class GameScene: SKScene {
     private func drawGame() {
         removeAllChildren()
         cardNodes.removeAll()
-        selectedCards.removeAll()
-        selectedHandCard = nil
+        selectedTableCards.removeAll()
+        selectedHandCards.removeAll()
 
         let title = SKLabelNode(fontNamed: "Arial")
         title.text = "15 Brush Cards"
@@ -201,7 +201,7 @@ class GameScene: SKScene {
     }
 
     private func drawActionButtons() {
-        guard isPlayerTurn && selectedHandCard != nil else { return }
+        guard isPlayerTurn && !selectedHandCards.isEmpty else { return }
 
         playButton?.removeFromParent()
         cancelButton?.removeFromParent()
@@ -502,36 +502,49 @@ class GameScene: SKScene {
         let isHandCard = cardNode.name?.starts(with: "hand_") ?? false
 
         if isHandCard {
-            if selectedHandCard != nil {
-                selectedHandCard?.deselect()
-            }
-            selectedHandCard = cardNode
-            cardNode.select()
-            updateMessage("Clique nas cartas da mesa que somem 15")
-        } else if cardNode.name?.starts(with: "table_") ?? false {
-            if selectedCards.contains(cardNode) {
-                selectedCards.removeAll { $0 == cardNode }
+            if selectedHandCards.contains(cardNode) {
+                selectedHandCards.removeAll { $0 == cardNode }
                 cardNode.deselect()
             } else {
-                selectedCards.append(cardNode)
+                selectedHandCards.append(cardNode)
                 cardNode.select()
             }
 
-            if let handCard = selectedHandCard {
-                checkMove(handCard: handCard, tableCards: selectedCards)
+            if !selectedHandCards.isEmpty {
+                updateMessage("Clique nas cartas da mesa que somem 15")
+            } else {
+                updateMessage("Selecione cartas da mão")
             }
+        } else if cardNode.name?.starts(with: "table_") ?? false {
+            guard !selectedHandCards.isEmpty else {
+                updateMessage("Selecione cartas da mão primeiro!")
+                return
+            }
+
+            if selectedTableCards.contains(cardNode) {
+                selectedTableCards.removeAll { $0 == cardNode }
+                cardNode.deselect()
+            } else {
+                selectedTableCards.append(cardNode)
+                cardNode.select()
+            }
+
+            checkMove(handCards: selectedHandCards, tableCards: selectedTableCards)
         }
     }
 
-    private func checkMove(handCard: CardNode, tableCards: [CardNode]) {
-        guard let handValue = Int(handCard.cardDisplay),
-              !tableCards.isEmpty else { return }
+    private func checkMove(handCards: [CardNode], tableCards: [CardNode]) {
+        guard !handCards.isEmpty else { return }
+
+        let handSum = handCards.reduce(0) { sum, card in
+            sum + (Int(card.cardDisplay) ?? 0)
+        }
 
         let tableSum = tableCards.reduce(0) { sum, card in
             sum + (Int(card.cardDisplay) ?? 0)
         }
 
-        let totalSum = handValue + tableSum
+        let totalSum = handSum + tableSum
         lastMoveSum = totalSum
 
         if totalSum == 15 {
@@ -542,27 +555,33 @@ class GameScene: SKScene {
         }
     }
 
-    private func executePlayerMove(handCard: CardNode, tableCards: [CardNode]) {
+    private func executePlayerMove(handCards: [CardNode], tableCards: [CardNode]) {
         isAnimating = true
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-            handCard.animateCollection()
+            for card in handCards {
+                card.animateCollection()
+            }
             for card in tableCards {
                 card.animateCollection()
             }
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self?.applyPlayerMove(handCard: handCard, tableCards: tableCards)
+                self?.applyPlayerMove(handCards: handCards, tableCards: tableCards)
             }
         }
     }
 
-    private func applyPlayerMove(handCard: CardNode, tableCards: [CardNode]) {
-        guard let handIndex = playerHandValues.firstIndex(of: handCard.cardDisplay) else { return }
+    private func applyPlayerMove(handCards: [CardNode], tableCards: [CardNode]) {
+        var collectedCardIds: [String] = []
 
-        playerHandValues.remove(at: handIndex)
+        for handCard in handCards {
+            if let index = playerHandValues.firstIndex(of: handCard.cardDisplay) {
+                collectedCardIds.append(handCard.cardDisplay)
+                playerHandValues.remove(at: index)
+            }
+        }
 
-        var collectedCardIds: [String] = [handCard.cardDisplay]
         for tableCard in tableCards {
             if let index = tableCardValues.firstIndex(of: tableCard.cardDisplay) {
                 collectedCardIds.append(tableCard.cardDisplay)
@@ -580,8 +599,8 @@ class GameScene: SKScene {
 
         replenishTable()
 
-        selectedHandCard = nil
-        selectedCards.removeAll()
+        selectedHandCards.removeAll()
+        selectedTableCards.removeAll()
         isAnimating = false
         isPlayerTurn = false
         drawGame()
@@ -612,8 +631,8 @@ class GameScene: SKScene {
             if buttonRect.contains(position) {
                 if playBtn.name == "skip_button" {
                     skipPlayerTurn()
-                } else if lastMoveSum == 15 && selectedHandCard != nil && !selectedCards.isEmpty {
-                    executePlayerMove(handCard: selectedHandCard!, tableCards: selectedCards)
+                } else if lastMoveSum == 15 && !selectedHandCards.isEmpty {
+                    executePlayerMove(handCards: selectedHandCards, tableCards: selectedTableCards)
                 }
                 return
             }
@@ -657,15 +676,17 @@ class GameScene: SKScene {
     }
 
     private func cancelSelection() {
-        selectedHandCard?.deselect()
-        selectedHandCard = nil
-        for card in selectedCards {
+        for card in selectedHandCards {
             card.deselect()
         }
-        selectedCards.removeAll()
+        for card in selectedTableCards {
+            card.deselect()
+        }
+        selectedHandCards.removeAll()
+        selectedTableCards.removeAll()
         playButton?.removeFromParent()
         cancelButton?.removeFromParent()
-        updateMessage("Clique em uma carta")
+        updateMessage("Selecione cartas da mão")
     }
 
     private func countRedCards(_ cards: [String]) -> Int {
