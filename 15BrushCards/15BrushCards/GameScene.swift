@@ -124,7 +124,7 @@ class GameScene: SKScene {
         addChild(boardBackground)
 
         let borderColor = SKColor(red: 0.05, green: 0.3, blue: 0.05, alpha: 1.0)
-        let border = SKShapeNode(rectOf: CGSize(width: frame.width - 40, height: frame.height - 40))
+        let border = SKShapeNode(rectOf: CGSize(width: frame.width - 40, height: frame.height - 40), cornerRadius: 25)
         border.fillColor = .clear
         border.strokeColor = borderColor
         border.lineWidth = 8
@@ -132,7 +132,7 @@ class GameScene: SKScene {
         border.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(border)
 
-        let innerBorder = SKShapeNode(rectOf: CGSize(width: frame.width - 60, height: frame.height - 60))
+        let innerBorder = SKShapeNode(rectOf: CGSize(width: frame.width - 60, height: frame.height - 60), cornerRadius: 25)
         innerBorder.fillColor = .clear
         innerBorder.strokeColor = SKColor(red: 0.2, green: 0.6, blue: 0.2, alpha: 0.6)
         innerBorder.lineWidth = 2
