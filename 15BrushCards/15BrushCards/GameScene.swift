@@ -186,7 +186,7 @@ class GameScene: SKScene {
         aiLabel.text = "Cartas de \(aiName)"
         aiLabel.fontSize = 14
         aiLabel.fontColor = .blue
-        aiLabel.position = CGPoint(x: frame.midX, y: frame.midY + 120)
+        aiLabel.position = CGPoint(x: frame.midX, y: frame.midY + 60)
         aiLabel.zPosition = 1
         addChild(aiLabel)
     }
@@ -254,7 +254,7 @@ class GameScene: SKScene {
         turnLabel?.fontSize = 14
         turnLabel?.fontColor = isPlayerTurn ? .green : .red
         turnLabel?.text = isPlayerTurn ? "SEU TURNO" : "TURNO DE \(aiName.uppercased())"
-        turnLabel?.position = CGPoint(x: frame.midX, y: frame.maxY - 70)
+        turnLabel?.position = CGPoint(x: frame.midX, y: frame.maxY - 40)
         turnLabel?.zPosition = 1
 
         if let label = turnLabel { addChild(label) }
