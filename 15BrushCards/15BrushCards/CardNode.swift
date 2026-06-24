@@ -1,17 +1,27 @@
 import SpriteKit
 
-class CardNode: SKSpriteNode {
+class CardNode: SKNode {
     let cardId: String
     let cardDisplay: String
     var isSelected = false
+    var cardSize: CGSize
+    private let cardShape: SKShapeNode
 
     init(cardId: String, display: String, size: CGSize) {
         self.cardId = cardId
         self.cardDisplay = display
-        super.init(texture: nil, color: .white, size: size)
+        self.cardSize = size
+        self.cardShape = SKShapeNode(rectOf: size, cornerRadius: 8)
+        super.init()
 
         name = cardId
         zPosition = 5
+
+        cardShape.fillColor = .white
+        cardShape.strokeColor = .black
+        cardShape.lineWidth = 1
+        cardShape.zPosition = 5
+        addChild(cardShape)
 
         let label = SKLabelNode(fontNamed: "Arial")
         label.text = display
@@ -24,6 +34,11 @@ class CardNode: SKSpriteNode {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    var color: SKColor {
+        get { cardShape.fillColor }
+        set { cardShape.fillColor = newValue }
     }
 
     func select() {
