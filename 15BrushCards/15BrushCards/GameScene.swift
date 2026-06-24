@@ -1,5 +1,4 @@
 import SpriteKit
-import UIKit
 
 class GameScene: SKScene {
     private var cardNodes: [CardNode] = []
