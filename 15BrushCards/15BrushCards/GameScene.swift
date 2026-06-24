@@ -19,11 +19,14 @@ class GameScene: SKScene {
     private var messageLabel: SKLabelNode?
     private var turnLabel: SKLabelNode?
     private var gameOverLabel: SKLabelNode?
+    private var playButton: SKShapeNode?
+    private var cancelButton: SKShapeNode?
 
     private let cardSize = CGSize(width: 60, height: 90)
     private let spacing: CGFloat = 20
     private var deckCards: [String] = Array(repeating: "card", count: 40)
     private var isGameOver = false
+    private var lastMoveSum = 0
 
     override func didMove(to view: SKView) {
         backgroundColor = .darkGray
@@ -120,10 +123,56 @@ class GameScene: SKScene {
         let status = SKLabelNode(fontNamed: "Arial")
         status.fontSize = 12
         status.fontColor = .white
-        status.text = "Você: \(playerScore) | IA: \(aiScore)"
+        status.text = "Você: \(playerScore) | IA: \(aiScore) | Baralho: \(deckCards.count)"
         status.position = CGPoint(x: frame.midX, y: frame.midY - 150)
         status.zPosition = 1
         addChild(status)
+    }
+
+    private func drawActionButtons() {
+        guard isPlayerTurn && selectedHandCard != nil else { return }
+
+        playButton?.removeFromParent()
+        cancelButton?.removeFromParent()
+
+        let buttonWidth: CGFloat = 80
+        let buttonHeight: CGFloat = 40
+
+        playButton = SKShapeNode(rectOf: CGSize(width: buttonWidth, height: buttonHeight), cornerRadius: 8)
+        playButton?.fillColor = .green
+        playButton?.strokeColor = .white
+        playButton?.lineWidth = 2
+        playButton?.position = CGPoint(x: frame.midX - 60, y: frame.minY + 30)
+        playButton?.zPosition = 50
+        playButton?.name = "play_button"
+
+        let playLabel = SKLabelNode(fontNamed: "Arial")
+        playLabel.text = "JOGAR"
+        playLabel.fontSize = 12
+        playLabel.fontColor = .white
+        playLabel.position = CGPoint(x: 0, y: -5)
+        playLabel.zPosition = 51
+        playButton?.addChild(playLabel)
+
+        if let btn = playButton { addChild(btn) }
+
+        cancelButton = SKShapeNode(rectOf: CGSize(width: buttonWidth, height: buttonHeight), cornerRadius: 8)
+        cancelButton?.fillColor = .red
+        cancelButton?.strokeColor = .darkGray
+        cancelButton?.lineWidth = 2
+        cancelButton?.position = CGPoint(x: frame.midX + 60, y: frame.minY + 30)
+        cancelButton?.zPosition = 50
+        cancelButton?.name = "cancel_button"
+
+        let cancelLabel = SKLabelNode(fontNamed: "Arial")
+        cancelLabel.text = "CANCELAR"
+        cancelLabel.fontSize = 10
+        cancelLabel.fontColor = .white
+        cancelLabel.position = CGPoint(x: 0, y: -5)
+        cancelLabel.zPosition = 51
+        cancelButton?.addChild(cancelLabel)
+
+        if let btn = cancelButton { addChild(btn) }
     }
 
     private func updateTurnDisplay() {
@@ -310,12 +359,13 @@ class GameScene: SKScene {
         }
 
         let totalSum = handValue + tableSum
+        lastMoveSum = totalSum
 
         if totalSum == 15 {
-            updateMessage("✅ 15 Pontos!")
-            executePlayerMove(handCard: handCard, tableCards: tableCards)
+            updateMessage("✅ Soma = 15! Clique JOGAR para confirmar")
+            drawActionButtons()
         } else {
-            updateMessage("❌ Soma = \(totalSum)")
+            updateMessage("❌ Soma = \(totalSum) (precisa 15)")
         }
     }
 
@@ -363,5 +413,27 @@ class GameScene: SKScene {
         if isGameOver {
             onGameOver?()
         }
+    }
+
+    func handleButtonTap(at position: CGPoint) {
+        if let playBtn = playButton, playBtn.contains(position) {
+            if lastMoveSum == 15 && selectedHandCard != nil && !selectedCards.isEmpty {
+                executePlayerMove(handCard: selectedHandCard!, tableCards: selectedCards)
+            }
+        } else if let cancelBtn = cancelButton, cancelBtn.contains(position) {
+            cancelSelection()
+        }
+    }
+
+    private func cancelSelection() {
+        selectedHandCard?.deselect()
+        selectedHandCard = nil
+        for card in selectedCards {
+            card.deselect()
+        }
+        selectedCards.removeAll()
+        playButton?.removeFromParent()
+        cancelButton?.removeFromParent()
+        updateMessage("Clique em uma carta")
     }
 }

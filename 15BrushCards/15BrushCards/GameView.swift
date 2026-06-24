@@ -34,7 +34,12 @@ struct InteractiveCardOverlay: View {
         GeometryReader { geometry in
             ZStack {
                 Color.clear
+                    .contentShape(Rectangle())
                     .onTapGesture { location in
+                        let sceneSize = geometry.size
+                        let sceneLoc = CGPoint(x: location.x, y: sceneSize.height - location.y)
+
+                        scene.handleButtonTap(at: sceneLoc)
                         scene.handleGameOverTap()
                     }
 
