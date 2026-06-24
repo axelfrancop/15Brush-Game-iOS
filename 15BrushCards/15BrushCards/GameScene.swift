@@ -356,10 +356,14 @@ class GameScene: SKScene {
 
     private func replenishTable() {
         let newCards = ["3", "5", "7", "2", "4", "8", "6", "1"]
-        while tableCardValues.count < 4 && !deckCards.isEmpty {
-            if let randomCard = newCards.randomElement() {
-                tableCardValues.append(randomCard)
-                deckCards.removeFirst()
+
+        // Só repõe a mesa quando ficar VAZIA (0 cartas)
+        if tableCardValues.isEmpty && !deckCards.isEmpty {
+            for _ in 0..<4 {
+                if let randomCard = newCards.randomElement() {
+                    tableCardValues.append(randomCard)
+                    deckCards.removeFirst()
+                }
             }
         }
 
