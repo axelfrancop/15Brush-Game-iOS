@@ -184,18 +184,19 @@ class GameScene: SKScene {
 
         let aiLabel = SKLabelNode(fontNamed: "Arial")
         aiLabel.text = "Cartas de \(aiName)"
-        aiLabel.fontSize = 10
+        aiLabel.fontSize = 14
         aiLabel.fontColor = .blue
-        aiLabel.position = CGPoint(x: frame.midX, y: frame.maxY - 130)
+        aiLabel.position = CGPoint(x: frame.midX, y: frame.midY + 120)
+        aiLabel.zPosition = 1
         addChild(aiLabel)
     }
 
     private func drawGameStatus() {
         let status = SKLabelNode(fontNamed: "Arial")
-        status.fontSize = 12
+        status.fontSize = 11
         status.fontColor = .white
         status.text = "Cartas Player: \(playerCollectedCards.count) | Cartas IA: \(aiCollectedCards.count) | Baralho: \(deckCards.count)"
-        status.position = CGPoint(x: frame.midX, y: frame.midY - 150)
+        status.position = CGPoint(x: frame.midX, y: frame.midY - 80)
         status.zPosition = 1
         addChild(status)
     }
