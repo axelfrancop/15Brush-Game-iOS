@@ -356,7 +356,14 @@ class GameScene: SKScene {
     }
 
     private func skipAITurn() {
-        replenishTable()
+        let playerHasValidMoves = !findValidMoves(for: playerHandValues, from: tableCardValues).isEmpty
+
+        if !playerHasValidMoves {
+            forceTableReplenishment()
+        } else {
+            replenishTable()
+        }
+
         isAnimating = false
         isPlayerTurn = true
         drawGame()
@@ -368,6 +375,26 @@ class GameScene: SKScene {
         // Só repõe a mesa quando ficar VAZIA (0 cartas)
         if tableCardValues.isEmpty && !deckCards.isEmpty {
             for _ in 0..<4 {
+                if let randomCard = newCards.randomElement() {
+                    tableCardValues.append(randomCard)
+                    deckCards.removeFirst()
+                }
+            }
+        }
+
+        replenishHands()
+        checkGameOver()
+    }
+
+    private func forceTableReplenishment() {
+        let newCards = ["3", "5", "7", "2", "4", "8", "6", "1"]
+
+        // Força reabastecimento mesmo se mesa não estiver vazia
+        // Usado quando ambos jogadores não têm jogadas válidas
+        tableCardValues.removeAll()
+
+        for _ in 0..<4 {
+            if !deckCards.isEmpty {
                 if let randomCard = newCards.randomElement() {
                     tableCardValues.append(randomCard)
                     deckCards.removeFirst()
@@ -591,7 +618,14 @@ class GameScene: SKScene {
     }
 
     private func skipPlayerTurn() {
-        replenishTable()
+        let aiHasValidMoves = !findValidMoves(for: aiHandValues, from: tableCardValues).isEmpty
+
+        if !aiHasValidMoves {
+            forceTableReplenishment()
+        } else {
+            replenishTable()
+        }
+
         isAnimating = false
         isPlayerTurn = false
         drawGame()
