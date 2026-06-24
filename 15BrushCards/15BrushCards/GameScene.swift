@@ -17,8 +17,12 @@ class GameScene: SKScene {
     private var playerHandValues: [String] = ["7", "8", "9"]
     private var aiHandValues: [String] = ["5", "6", "10"]
 
+    private var playerCollectedCards: [String] = []
+    private var aiCollectedCards: [String] = []
+
     private var playerScore = 0
     private var aiScore = 0
+    private var lastPlayerToCollect: String = "player"
 
     private var isPlayerTurn = true
     private var isAnimating = false
@@ -33,6 +37,13 @@ class GameScene: SKScene {
     private var deckCards: [String] = Array(repeating: "card", count: 40)
     private var isGameOver = false
     private var lastMoveSum = 0
+
+    private let cardNaipes: [String: String] = [
+        "1": "O", "2": "O", "3": "O", "4": "O", "5": "O", "6": "O", "7": "O", "8": "O", "9": "O", "10": "O",
+        "11": "C", "12": "C", "13": "C", "14": "C", "15": "C", "16": "C", "17": "C", "18": "C", "19": "C", "20": "C",
+        "21": "E", "22": "E", "23": "E", "24": "E", "25": "E", "26": "E", "27": "E", "28": "E", "29": "E", "30": "E",
+        "31": "P", "32": "P", "33": "P", "34": "P", "35": "P", "36": "P", "37": "P", "38": "P", "39": "P", "40": "P"
+    ]
 
     override func didMove(to view: SKView) {
         backgroundColor = .darkGray
@@ -145,7 +156,7 @@ class GameScene: SKScene {
         let status = SKLabelNode(fontNamed: "Arial")
         status.fontSize = 12
         status.fontColor = .white
-        status.text = "Você: \(playerScore) | IA: \(aiScore) | Baralho: \(deckCards.count)"
+        status.text = "Cartas Player: \(playerCollectedCards.count) | Cartas IA: \(aiCollectedCards.count) | Baralho: \(deckCards.count)"
         status.position = CGPoint(x: frame.midX, y: frame.midY - 150)
         status.zPosition = 1
         addChild(status)
@@ -303,13 +314,17 @@ class GameScene: SKScene {
             aiHandValues.remove(at: handIndex)
         }
 
+        var collectedCardIds: [String] = [handCard]
         for card in tableCards {
             if let index = tableCardValues.firstIndex(of: card) {
+                collectedCardIds.append(card)
                 tableCardValues.remove(at: index)
             }
         }
 
-        aiScore += tableCards.count + 1
+        aiCollectedCards.append(contentsOf: collectedCardIds)
+        lastPlayerToCollect = "ai"
+
         replenishTable()
 
         isAnimating = false
@@ -368,6 +383,8 @@ class GameScene: SKScene {
     private func endGame() {
         isGameOver = true
         isAnimating = true
+
+        calculateFinalScores()
 
         let winner = playerScore > aiScore ? "VOCÊ VENCEU! 🎉" : "IA VENCEU! 🤖"
         let winnerColor: SKColor = playerScore > aiScore ? .green : .red
@@ -466,13 +483,17 @@ class GameScene: SKScene {
 
         playerHandValues.remove(at: handIndex)
 
+        var collectedCardIds: [String] = [handCard.cardDisplay]
         for tableCard in tableCards {
             if let index = tableCardValues.firstIndex(of: tableCard.cardDisplay) {
+                collectedCardIds.append(tableCard.cardDisplay)
                 tableCardValues.remove(at: index)
             }
         }
 
-        playerScore += tableCards.count + 1
+        playerCollectedCards.append(contentsOf: collectedCardIds)
+        lastPlayerToCollect = "player"
+
         replenishTable()
 
         selectedHandCard = nil
@@ -554,5 +575,45 @@ class GameScene: SKScene {
         playButton?.removeFromParent()
         cancelButton?.removeFromParent()
         updateMessage("Clique em uma carta")
+    }
+
+    private func calculateFinalScores() {
+        playerScore = 0
+        aiScore = 0
+
+        // Regra 1: Carta 7 de Ouro = 1 ponto
+        if playerCollectedCards.contains("7") { playerScore += 1 }
+        if aiCollectedCards.contains("7") { aiScore += 1 }
+
+        // Regra 2: Mais cartas vermelhas = 1 ponto
+        let playerRedCards = countRedCards(playerCollectedCards)
+        let aiRedCards = countRedCards(aiCollectedCards)
+        if playerRedCards > aiRedCards { playerScore += 1 }
+        else if aiRedCards > playerRedCards { aiScore += 1 }
+
+        // Regra 3: Mais cartas coletadas = 1 ponto
+        if playerCollectedCards.count > aiCollectedCards.count { playerScore += 1 }
+        else if aiCollectedCards.count > playerCollectedCards.count { aiScore += 1 }
+
+        // Regra 4: Última carta coletada = 1 ponto
+        if lastPlayerToCollect == "player" { playerScore += 1 }
+        else if lastPlayerToCollect == "ai" { aiScore += 1 }
+
+        print("SCORE: Player=\(playerScore), AI=\(aiScore)")
+        print("DETAILS: Player Red=\(countRedCards(playerCollectedCards)), AI Red=\(countRedCards(aiCollectedCards))")
+        print("DETAILS: Player Cards=\(playerCollectedCards.count), AI Cards=\(aiCollectedCards.count)")
+        print("DETAILS: Last Player=\(lastPlayerToCollect)")
+    }
+
+    private func countRedCards(_ cards: [String]) -> Int {
+        var count = 0
+        for card in cards {
+            if let naipe = cardNaipes[card] {
+                if naipe == "O" || naipe == "C" {
+                    count += 1
+                }
+            }
+        }
+        return count
     }
 }
