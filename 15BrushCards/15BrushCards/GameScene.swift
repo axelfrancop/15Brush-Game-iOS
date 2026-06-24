@@ -2,7 +2,7 @@ import SpriteKit
 import Foundation
 
 class GameScene: SKScene {
-    private var cardNodes: [CardNode] = []
+    var cardNodes: [CardNode] = []
     private var selectedCards: [CardNode] = []
     private var selectedHandCard: CardNode?
 
@@ -223,7 +223,7 @@ class GameScene: SKScene {
     }
 
 
-    private func handleCardTap(_ cardNode: CardNode) {
+    func handleCardTap(_ cardNode: CardNode) {
         guard isPlayerTurn, !isAnimating else { return }
 
         let isHandCard = cardNode.name?.starts(with: "hand_") ?? false
