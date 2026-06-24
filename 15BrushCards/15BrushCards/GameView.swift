@@ -2,31 +2,22 @@ import SwiftUI
 import SpriteKit
 
 struct GameView: View {
-    @Environment(\.dismiss) var dismiss
-    let scene = GameScene()
+    let scene: GameScene
+
+    init() {
+        let gameScene = GameScene()
+        gameScene.scaleMode = .resizeFill
+        self.scene = gameScene
+    }
 
     var body: some View {
         ZStack {
             SpriteView(scene: scene)
                 .ignoresSafeArea()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-            VStack {
-                HStack {
-                    Button(action: { dismiss() }) {
-                        Image(systemName: "chevron.left")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding(10)
-                            .background(Color.black.opacity(0.5))
-                            .cornerRadius(8)
-                    }
-                    Spacer()
-                }
-                .padding()
-
-                Spacer()
-            }
+        }
+        .onAppear {
+            scene.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         }
     }
 }
