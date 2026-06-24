@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var gameStarted = false
+    @State private var showSpriteKit = false
     @State private var gameMode: String = "singlePlayer"
     @State private var gameStatus = "Pronto para jogar"
 
@@ -21,7 +22,9 @@ struct ContentView: View {
             )
             .ignoresSafeArea()
 
-            if !gameStarted {
+            if showSpriteKit {
+                GamePlayView()
+            } else if !gameStarted {
                 menuView
             } else {
                 gameView
@@ -118,15 +121,28 @@ struct ContentView: View {
 
             Spacer()
 
-            Button(action: {
-                gameStarted = false
-            }) {
-                Text("Voltar ao Menu")
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
-                    .background(Color.gray)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
+            HStack(spacing: 12) {
+                Button(action: {
+                    gameStarted = false
+                }) {
+                    Text("Voltar")
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                        .background(Color.gray)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                }
+
+                Button(action: {
+                    showSpriteKit = true
+                }) {
+                    Text("Começar Jogo")
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                }
             }
             .padding()
         }
