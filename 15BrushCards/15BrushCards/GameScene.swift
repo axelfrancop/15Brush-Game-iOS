@@ -7,6 +7,12 @@ class GameScene: SKScene {
     private var selectedHandCard: CardNode?
     var onGameOver: (() -> Void)?
 
+    private var hasValidMoves: Bool {
+        guard isPlayerTurn else { return false }
+        let moves = findValidMoves(for: playerHandValues, from: tableCardValues)
+        return !moves.isEmpty
+    }
+
     private var tableCardValues: [String] = ["4", "2", "9", "6"]
     private var playerHandValues: [String] = ["7", "8", "9"]
     private var aiHandValues: [String] = ["5", "6", "10"]
@@ -191,11 +197,47 @@ class GameScene: SKScene {
         messageLabel = SKLabelNode(fontNamed: "Arial")
         messageLabel?.fontSize = 12
         messageLabel?.fontColor = .yellow
-        messageLabel?.text = isPlayerTurn ? "Clique em uma carta" : "IA jogando..."
+
+        if isPlayerTurn {
+            if hasValidMoves {
+                messageLabel?.text = "Clique em uma carta"
+            } else {
+                messageLabel?.text = "Sem jogadas válidas - Pule o turno"
+                drawSkipButton()
+            }
+        } else {
+            messageLabel?.text = "IA jogando..."
+        }
+
         messageLabel?.position = CGPoint(x: frame.midX, y: frame.maxY - 95)
         messageLabel?.zPosition = 1
 
         if let label = messageLabel { addChild(label) }
+    }
+
+    private func drawSkipButton() {
+        playButton?.removeFromParent()
+
+        let buttonWidth: CGFloat = 100
+        let buttonHeight: CGFloat = 40
+
+        playButton = SKShapeNode(rectOf: CGSize(width: buttonWidth, height: buttonHeight), cornerRadius: 8)
+        playButton?.fillColor = .orange
+        playButton?.strokeColor = .white
+        playButton?.lineWidth = 2
+        playButton?.position = CGPoint(x: frame.midX, y: frame.minY + 30)
+        playButton?.zPosition = 50
+        playButton?.name = "skip_button"
+
+        let skipLabel = SKLabelNode(fontNamed: "Arial")
+        skipLabel.text = "PULAR"
+        skipLabel.fontSize = 14
+        skipLabel.fontColor = .white
+        skipLabel.position = CGPoint(x: 0, y: -5)
+        skipLabel.zPosition = 51
+        playButton?.addChild(skipLabel)
+
+        if let btn = playButton { addChild(btn) }
     }
 
     private func scheduleAITurn() {
@@ -417,12 +459,21 @@ class GameScene: SKScene {
 
     func handleButtonTap(at position: CGPoint) {
         if let playBtn = playButton, playBtn.contains(position) {
-            if lastMoveSum == 15 && selectedHandCard != nil && !selectedCards.isEmpty {
+            if playBtn.name == "skip_button" {
+                skipPlayerTurn()
+            } else if lastMoveSum == 15 && selectedHandCard != nil && !selectedCards.isEmpty {
                 executePlayerMove(handCard: selectedHandCard!, tableCards: selectedCards)
             }
         } else if let cancelBtn = cancelButton, cancelBtn.contains(position) {
             cancelSelection()
         }
+    }
+
+    private func skipPlayerTurn() {
+        replenishTable()
+        isAnimating = false
+        isPlayerTurn = false
+        drawGame()
     }
 
     private func cancelSelection() {
