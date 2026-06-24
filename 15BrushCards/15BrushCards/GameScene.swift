@@ -333,7 +333,26 @@ class GameScene: SKScene {
             }
         }
 
+        replenishHands()
         checkGameOver()
+    }
+
+    private func replenishHands() {
+        let newCards = ["3", "5", "7", "2", "4", "8", "6", "1", "9", "10"]
+
+        while playerHandValues.count < 3 && !deckCards.isEmpty {
+            if let randomCard = newCards.randomElement() {
+                playerHandValues.append(randomCard)
+                deckCards.removeFirst()
+            }
+        }
+
+        while aiHandValues.count < 3 && !deckCards.isEmpty {
+            if let randomCard = newCards.randomElement() {
+                aiHandValues.append(randomCard)
+                deckCards.removeFirst()
+            }
+        }
     }
 
     private func checkGameOver() {
