@@ -317,6 +317,8 @@ class GameScene: SKScene {
         turnLabel?.position = CGPoint(x: frame.midX, y: frame.maxY - 40)
         turnLabel?.zPosition = 1
 
+        animateHandsForTurn()
+
         if let label = turnLabel { addChild(label) }
 
         messageLabel?.removeFromParent()
@@ -339,6 +341,32 @@ class GameScene: SKScene {
         messageLabel?.zPosition = 1
 
         if let label = messageLabel { addChild(label) }
+    }
+
+    private func animateHandsForTurn() {
+        for cardNode in cardNodes {
+            guard cardNode.cardId.hasPrefix("hand_") || cardNode.cardId.hasPrefix("ai_") else { continue }
+
+            let scaleAction = SKAction.scale(to: 1.25, duration: 0.4)
+            scaleAction.timingMode = .easeInEaseOut
+
+            let normalScale = SKAction.scale(to: 1.0, duration: 0.4)
+            normalScale.timingMode = .easeInEaseOut
+
+            if isPlayerTurn {
+                if cardNode.cardId.hasPrefix("hand_") {
+                    cardNode.run(scaleAction)
+                } else if cardNode.cardId.hasPrefix("ai_") {
+                    cardNode.run(normalScale)
+                }
+            } else {
+                if cardNode.cardId.hasPrefix("hand_") {
+                    cardNode.run(normalScale)
+                } else if cardNode.cardId.hasPrefix("ai_") {
+                    cardNode.run(scaleAction)
+                }
+            }
+        }
     }
 
     private func drawSkipButton() {
