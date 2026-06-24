@@ -5,6 +5,10 @@ class GameScene: SKScene {
     private var selectedCards: [CardNode] = []
     private var selectedHandCard: CardNode?
 
+    private var tableCardValues: [String] = ["4", "2", "9", "6"]
+    private var handCardValues: [String] = ["7", "8", "9"]
+    private var messageLabel: SKLabelNode?
+
     private let cardSize = CGSize(width: 60, height: 90)
     private let spacing: CGFloat = 20
 
@@ -17,6 +21,7 @@ class GameScene: SKScene {
         removeAllChildren()
         cardNodes.removeAll()
         selectedCards.removeAll()
+        selectedHandCard = nil
 
         let title = SKLabelNode(fontNamed: "Arial")
         title.text = "15 Brush Cards"
@@ -31,7 +36,6 @@ class GameScene: SKScene {
     }
 
     private func drawTableCards() {
-        let tableCardValues = ["4", "2", "9", "6"]
         let startX = frame.midX - CGFloat(tableCardValues.count - 1) * (cardSize.width + spacing) / 2
         let startY = frame.midY + 80
 
@@ -50,11 +54,10 @@ class GameScene: SKScene {
     }
 
     private func drawPlayerHand() {
-        let handValues = ["7", "8", "9"]
-        let startX = frame.midX - CGFloat(handValues.count - 1) * (cardSize.width + spacing) / 2
-        let startY = frame.minY + 60
+        let startX = frame.midX - CGFloat(handCardValues.count - 1) * (cardSize.width + spacing) / 2
+        let startY = frame.minY + 100
 
-        for (index, value) in handValues.enumerated() {
+        for (index, value) in handCardValues.enumerated() {
             let position = CGPoint(
                 x: startX + CGFloat(index) * (cardSize.width + spacing),
                 y: startY
@@ -73,16 +76,18 @@ class GameScene: SKScene {
         let status = SKLabelNode(fontNamed: "Arial")
         status.fontSize = 14
         status.fontColor = .white
-        status.text = "Mesa: 4 cartas | Baralho: 32 cartas"
+        status.text = "Mesa: \(tableCardValues.count) cartas | Baralho: 32 cartas"
         status.position = CGPoint(x: frame.midX, y: frame.maxY - 80)
+        status.zPosition = 1
         addChild(status)
 
-        let hint = SKLabelNode(fontNamed: "Arial")
-        hint.fontSize = 12
-        hint.fontColor = .yellow
-        hint.text = "Toque em uma carta da mão, depois na mesa (soma = 15)"
-        hint.position = CGPoint(x: frame.midX, y: frame.maxY - 100)
-        addChild(hint)
+        messageLabel = SKLabelNode(fontNamed: "Arial")
+        messageLabel?.fontSize = 12
+        messageLabel?.fontColor = .yellow
+        messageLabel?.text = "Selecione uma carta da mão"
+        messageLabel?.position = CGPoint(x: frame.midX, y: frame.maxY - 105)
+        messageLabel?.zPosition = 1
+        if let label = messageLabel { addChild(label) }
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -106,6 +111,7 @@ class GameScene: SKScene {
             }
             selectedHandCard = cardNode
             cardNode.select()
+            updateMessage("Agora clique nas cartas da mesa")
         } else {
             if selectedCards.contains(cardNode) {
                 selectedCards.removeAll { $0 == cardNode }
@@ -114,6 +120,67 @@ class GameScene: SKScene {
                 selectedCards.append(cardNode)
                 cardNode.select()
             }
+
+            if let handCard = selectedHandCard {
+                checkMove(handCard: handCard, tableCards: selectedCards)
+            }
         }
+    }
+
+    private func checkMove(handCard: CardNode, tableCards: [CardNode]) {
+        guard let handValue = Int(handCard.cardDisplay),
+              !tableCards.isEmpty else { return }
+
+        let tableSum = tableCards.reduce(0) { sum, card in
+            sum + (Int(card.cardDisplay) ?? 0)
+        }
+
+        let totalSum = handValue + tableSum
+
+        if totalSum == 15 {
+            updateMessage("✅ 15 Pontos! Excelente!")
+            executeMove(handCard: handCard, tableCards: tableCards)
+        } else {
+            updateMessage("❌ Soma = \(totalSum). Tente novamente!")
+        }
+    }
+
+    private func executeMove(handCard: CardNode, tableCards: [CardNode]) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            handCard.animateCollection()
+            for card in tableCards {
+                card.animateCollection()
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self?.applyMove(handCard: handCard, tableCards: tableCards)
+            }
+        }
+    }
+
+    private func applyMove(handCard: CardNode, tableCards: [CardNode]) {
+        guard let handIndex = handCardValues.firstIndex(of: handCard.cardDisplay) else { return }
+
+        handCardValues.remove(at: handIndex)
+
+        for tableCard in tableCards {
+            if let index = tableCardValues.firstIndex(of: tableCard.cardDisplay) {
+                tableCardValues.remove(at: index)
+            }
+        }
+
+        tableCardValues.append("3")
+        if tableCardValues.count < 4, !handCardValues.isEmpty {
+            tableCardValues.append("5")
+        }
+
+        selectedHandCard = nil
+        selectedCards.removeAll()
+        updateMessage("Sua vez! Selecione uma carta")
+        drawGame()
+    }
+
+    private func updateMessage(_ text: String) {
+        messageLabel?.text = text
     }
 }
