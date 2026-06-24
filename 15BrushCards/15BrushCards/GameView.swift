@@ -3,6 +3,7 @@ import SpriteKit
 
 struct GameView: View {
     @State private var scene: GameScene
+    @Environment(\.dismiss) var dismiss
 
     init() {
         let gameScene = GameScene()
@@ -18,16 +19,25 @@ struct GameView: View {
 
             InteractiveCardOverlay(scene: scene)
         }
+        .onAppear {
+            scene.onGameOver = {
+                dismiss()
+            }
+        }
     }
 }
 
 struct InteractiveCardOverlay: View {
     let scene: GameScene
-    @State private var tappedCardId: String?
 
     var body: some View {
         GeometryReader { geometry in
             ZStack {
+                Color.clear
+                    .onTapGesture { location in
+                        scene.handleGameOverTap()
+                    }
+
                 ForEach(scene.cardNodes, id: \.cardId) { cardNode in
                     Color.clear
                         .frame(width: 60, height: 90)

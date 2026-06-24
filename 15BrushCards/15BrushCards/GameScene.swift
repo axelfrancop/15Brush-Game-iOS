@@ -5,6 +5,7 @@ class GameScene: SKScene {
     var cardNodes: [CardNode] = []
     private var selectedCards: [CardNode] = []
     private var selectedHandCard: CardNode?
+    var onGameOver: (() -> Void)?
 
     private var tableCardValues: [String] = ["4", "2", "9", "6"]
     private var playerHandValues: [String] = ["7", "8", "9"]
@@ -17,9 +18,12 @@ class GameScene: SKScene {
     private var isAnimating = false
     private var messageLabel: SKLabelNode?
     private var turnLabel: SKLabelNode?
+    private var gameOverLabel: SKLabelNode?
 
     private let cardSize = CGSize(width: 60, height: 90)
     private let spacing: CGFloat = 20
+    private var deckCards: [String] = Array(repeating: "card", count: 40)
+    private var isGameOver = false
 
     override func didMove(to view: SKView) {
         backgroundColor = .darkGray
@@ -215,11 +219,58 @@ class GameScene: SKScene {
 
     private func replenishTable() {
         let newCards = ["3", "5", "7", "2", "4", "8", "6", "1"]
-        while tableCardValues.count < 4 {
+        while tableCardValues.count < 4 && !deckCards.isEmpty {
             if let randomCard = newCards.randomElement() {
                 tableCardValues.append(randomCard)
+                deckCards.removeFirst()
             }
         }
+
+        checkGameOver()
+    }
+
+    private func checkGameOver() {
+        let playerHandEmpty = playerHandValues.isEmpty
+        let aiHandEmpty = aiHandValues.isEmpty
+        let deckEmpty = deckCards.isEmpty
+
+        if deckEmpty && (playerHandEmpty || aiHandEmpty) {
+            endGame()
+        }
+    }
+
+    private func endGame() {
+        isGameOver = true
+        isAnimating = true
+
+        let winner = playerScore > aiScore ? "VOCÊ VENCEU! 🎉" : "IA VENCEU! 🤖"
+        let winnerColor: SKColor = playerScore > aiScore ? .green : .red
+
+        gameOverLabel?.removeFromParent()
+        gameOverLabel = SKLabelNode(fontNamed: "Arial")
+        gameOverLabel?.text = winner
+        gameOverLabel?.fontSize = 32
+        gameOverLabel?.fontColor = winnerColor
+        gameOverLabel?.position = CGPoint(x: frame.midX, y: frame.midY + 50)
+        gameOverLabel?.zPosition = 100
+
+        if let label = gameOverLabel { addChild(label) }
+
+        let scoreLabel = SKLabelNode(fontNamed: "Arial")
+        scoreLabel.text = "Você: \(playerScore) | IA: \(aiScore)"
+        scoreLabel.fontSize = 18
+        scoreLabel.fontColor = .white
+        scoreLabel.position = CGPoint(x: frame.midX, y: frame.midY)
+        scoreLabel.zPosition = 100
+        addChild(scoreLabel)
+
+        let restartLabel = SKLabelNode(fontNamed: "Arial")
+        restartLabel.text = "Toque para voltar ao menu"
+        restartLabel.fontSize = 14
+        restartLabel.fontColor = .yellow
+        restartLabel.position = CGPoint(x: frame.midX, y: frame.midY - 50)
+        restartLabel.zPosition = 100
+        addChild(restartLabel)
     }
 
 
@@ -306,5 +357,11 @@ class GameScene: SKScene {
 
     private func updateMessage(_ text: String) {
         messageLabel?.text = text
+    }
+
+    func handleGameOverTap() {
+        if isGameOver {
+            onGameOver?()
+        }
     }
 }
