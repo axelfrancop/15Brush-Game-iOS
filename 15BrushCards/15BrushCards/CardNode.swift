@@ -11,8 +11,6 @@ class CardNode: SKSpriteNode {
         super.init(texture: nil, color: .white, size: size)
 
         name = cardId
-        strokeColor = .black
-        lineWidth = 2
         zPosition = 5
 
         let label = SKLabelNode(fontNamed: "Arial")
