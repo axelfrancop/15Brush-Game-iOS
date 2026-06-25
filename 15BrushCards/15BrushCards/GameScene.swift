@@ -22,10 +22,13 @@ class GameScene: SKScene {
 
     private var playerScore = 0
     private var aiScore = 0
+    private var playerTotalScore = 0
+    private var aiTotalScore = 0
     private var lastPlayerToCollect: String = "player"
 
     private var playerBrushCount = 0
     private var aiBrushCount = 0
+    private var roundNumber = 1
 
     private var isPlayerTurn = true
     private var isAnimating = false
@@ -543,39 +546,96 @@ class GameScene: SKScene {
     }
 
     private func checkGameOver() {
+        let deckEmpty = deckCards.isEmpty
+        let tableEmpty = tableCardValues.isEmpty
         let playerHandEmpty = playerHandValues.isEmpty
         let aiHandEmpty = aiHandValues.isEmpty
-        let deckEmpty = deckCards.isEmpty
+
+        if deckEmpty && tableEmpty && !playerHandEmpty && !aiHandEmpty {
+            let playerValidMoves = findValidMoves(for: playerHandValues, from: tableCardValues)
+            let aiValidMoves = findValidMoves(for: aiHandValues, from: tableCardValues)
+
+            if playerValidMoves.isEmpty && aiValidMoves.isEmpty {
+                endRound()
+                return
+            }
+        }
 
         if deckEmpty && (playerHandEmpty || aiHandEmpty) {
-            endGame()
+            endRound()
         }
+    }
+
+    private func endRound() {
+        calculateFinalScores()
+        playerTotalScore += playerScore
+        aiTotalScore += aiScore
+
+        print("ROUND \(roundNumber) SCORES: Player=\(playerScore), AI=\(aiScore)")
+        print("TOTAL SCORES: Player=\(playerTotalScore), AI=\(aiTotalScore)")
+
+        if playerTotalScore >= 15 || aiTotalScore >= 15 {
+            endGame()
+        } else {
+            startNewRound()
+        }
+    }
+
+    private func startNewRound() {
+        roundNumber += 1
+        playerScore = 0
+        aiScore = 0
+        playerBrushCount = 0
+        aiBrushCount = 0
+        playerCollectedCards.removeAll()
+        aiCollectedCards.removeAll()
+        selectedHandCards.removeAll()
+        selectedTableCards.removeAll()
+        isPlayerTurn = true
+        lastPlayerToCollect = "player"
+
+        initializeDeck()
+        drawGame()
     }
 
     private func endGame() {
         isGameOver = true
         isAnimating = true
 
-        calculateFinalScores()
-
-        let winner = playerScore > aiScore ? "VOCÊ VENCEU! 🎉" : "\(aiName.uppercased()) VENCEU! 🤖"
-        let winnerColor: SKColor = playerScore > aiScore ? .green : .red
+        let winner = playerTotalScore >= 15 ? "VOCÊ VENCEU! 🎉" : "\(aiName.uppercased()) VENCEU! 🤖"
+        let winnerColor: SKColor = playerTotalScore >= 15 ? .green : .red
 
         gameOverLabel?.removeFromParent()
         gameOverLabel = SKLabelNode(fontNamed: "Arial")
         gameOverLabel?.text = winner
         gameOverLabel?.fontSize = 32
         gameOverLabel?.fontColor = winnerColor
-        gameOverLabel?.position = CGPoint(x: frame.midX, y: frame.midY + 50)
+        gameOverLabel?.position = CGPoint(x: frame.midX, y: frame.midY + 100)
         gameOverLabel?.zPosition = 100
 
         if let label = gameOverLabel { addChild(label) }
 
+        let totalScoreLabel = SKLabelNode(fontNamed: "Arial")
+        totalScoreLabel.text = "Placar Final: \(playerTotalScore) x \(aiTotalScore)"
+        totalScoreLabel.fontSize = 22
+        totalScoreLabel.fontColor = .white
+        totalScoreLabel.position = CGPoint(x: frame.midX, y: frame.midY + 30)
+        totalScoreLabel.zPosition = 100
+        addChild(totalScoreLabel)
+
+        let roundScoreLabel = SKLabelNode(fontNamed: "Arial")
+        roundScoreLabel.text = "Rodada \(roundNumber): \(playerScore) x \(aiScore)"
+        roundScoreLabel.fontSize = 16
+        roundScoreLabel.fontColor = .lightGray
+        roundScoreLabel.position = CGPoint(x: frame.midX, y: frame.midY - 30)
+        roundScoreLabel.zPosition = 100
+        addChild(roundScoreLabel)
+
         let scoreLabel = SKLabelNode(fontNamed: "Arial")
-        scoreLabel.text = "Você: \(playerScore) | IA: \(aiScore)"
-        scoreLabel.fontSize = 18
-        scoreLabel.fontColor = .white
-        scoreLabel.position = CGPoint(x: frame.midX, y: frame.midY)
+        scoreLabel.text = "Clique para voltar ao menu"
+        scoreLabel.fontSize = 14
+        scoreLabel.fontColor = .yellow
+        scoreLabel.position = CGPoint(x: frame.midX, y: frame.midY - 80)
         scoreLabel.zPosition = 100
         addChild(scoreLabel)
 
