@@ -262,6 +262,18 @@ class GameScene: SKScene {
         status.position = CGPoint(x: frame.midX, y: frame.midY - 80)
         status.zPosition = 1
         addChild(status)
+
+        drawTotalScore()
+    }
+
+    private func drawTotalScore() {
+        let totalScoreLabel = SKLabelNode(fontNamed: "Arial")
+        totalScoreLabel.fontSize = 16
+        totalScoreLabel.fontColor = .yellow
+        totalScoreLabel.text = "Total: \(playerTotalScore) x \(aiTotalScore) | Rodada \(roundNumber)"
+        totalScoreLabel.position = CGPoint(x: frame.midX, y: frame.midY - 110)
+        totalScoreLabel.zPosition = 1
+        addChild(totalScoreLabel)
     }
 
     private func drawActionButtons() {
