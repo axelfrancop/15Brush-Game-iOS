@@ -503,7 +503,7 @@ class GameScene: SKScene {
         // Só repõe a mesa quando ficar VAZIA (0 cartas)
         if tableCardValues.isEmpty && !deckCards.isEmpty {
             for _ in 0..<4 {
-                if let randomCard = newCards.randomElement() {
+                if !deckCards.isEmpty, let randomCard = newCards.randomElement() {
                     tableCardValues.append(randomCard)
                     deckCards.removeFirst()
                 }
@@ -523,11 +523,9 @@ class GameScene: SKScene {
         let cardsNeeded = 4 - tableCardValues.count
 
         for _ in 0..<cardsNeeded {
-            if !deckCards.isEmpty {
-                if let randomCard = newCards.randomElement() {
-                    tableCardValues.append(randomCard)
-                    deckCards.removeFirst()
-                }
+            if !deckCards.isEmpty, let randomCard = newCards.randomElement() {
+                tableCardValues.append(randomCard)
+                deckCards.removeFirst()
             }
         }
 
@@ -541,7 +539,7 @@ class GameScene: SKScene {
         // Só reabastece mão quando ficar VAZIA (0 cartas)
         if playerHandValues.isEmpty && !deckCards.isEmpty {
             for _ in 0..<3 {
-                if let randomCard = newCards.randomElement() {
+                if !deckCards.isEmpty, let randomCard = newCards.randomElement() {
                     playerHandValues.append(randomCard)
                     deckCards.removeFirst()
                 }
@@ -550,7 +548,7 @@ class GameScene: SKScene {
 
         if aiHandValues.isEmpty && !deckCards.isEmpty {
             for _ in 0..<3 {
-                if let randomCard = newCards.randomElement() {
+                if !deckCards.isEmpty, let randomCard = newCards.randomElement() {
                     aiHandValues.append(randomCard)
                     deckCards.removeFirst()
                 }
@@ -589,11 +587,9 @@ class GameScene: SKScene {
         tableCardValues.removeAll()
 
         for _ in 0..<4 {
-            if !deckCards.isEmpty {
-                if let randomCard = newCards.randomElement() {
-                    tableCardValues.append(randomCard)
-                    deckCards.removeFirst()
-                }
+            if !deckCards.isEmpty, let randomCard = newCards.randomElement() {
+                tableCardValues.append(randomCard)
+                deckCards.removeFirst()
             }
         }
 
