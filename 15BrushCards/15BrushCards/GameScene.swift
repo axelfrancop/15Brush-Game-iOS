@@ -572,14 +572,7 @@ class GameScene: SKScene {
             if !deckEmpty {
                 resetTableWithNewCards()
                 return
-            } else if tableEmpty {
-                endRound()
-                return
-            }
-        }
-
-        if deckEmpty && tableEmpty && !playerHandEmpty && !aiHandEmpty {
-            if noValidMovesForBoth {
+            } else {
                 endRound()
                 return
             }
