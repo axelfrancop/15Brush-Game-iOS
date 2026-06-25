@@ -519,9 +519,10 @@ class GameScene: SKScene {
 
         // Força reabastecimento mesmo se mesa não estiver vazia
         // Usado quando ambos jogadores não têm jogadas válidas
-        tableCardValues.removeAll()
+        // Mantém cartas existentes e só adiciona o necessário para chegar a 4
+        let cardsNeeded = 4 - tableCardValues.count
 
-        for _ in 0..<4 {
+        for _ in 0..<cardsNeeded {
             if !deckCards.isEmpty {
                 if let randomCard = newCards.randomElement() {
                     tableCardValues.append(randomCard)
