@@ -268,9 +268,9 @@ class GameScene: SKScene {
 
     private func drawTotalScore() {
         let totalScoreLabel = SKLabelNode(fontNamed: "Arial")
-        totalScoreLabel.fontSize = 16
+        totalScoreLabel.fontSize = 14
         totalScoreLabel.fontColor = .yellow
-        totalScoreLabel.text = "Total: \(playerTotalScore) x \(aiTotalScore) | Rodada \(roundNumber)"
+        totalScoreLabel.text = "🧑 Você: \(playerTotalScore) | 🤖 \(aiName): \(aiTotalScore) | Rodada \(roundNumber)"
         totalScoreLabel.position = CGPoint(x: frame.midX, y: frame.midY - 110)
         totalScoreLabel.zPosition = 1
         addChild(totalScoreLabel)
