@@ -564,11 +564,22 @@ class GameScene: SKScene {
         let playerHandEmpty = playerHandValues.isEmpty
         let aiHandEmpty = aiHandValues.isEmpty
 
-        if deckEmpty && tableEmpty && !playerHandEmpty && !aiHandEmpty {
-            let playerValidMoves = findValidMoves(for: playerHandValues, from: tableCardValues)
-            let aiValidMoves = findValidMoves(for: aiHandValues, from: tableCardValues)
+        let playerValidMoves = findValidMoves(for: playerHandValues, from: tableCardValues)
+        let aiValidMoves = findValidMoves(for: aiHandValues, from: tableCardValues)
+        let noValidMovesForBoth = playerValidMoves.isEmpty && aiValidMoves.isEmpty
 
-            if playerValidMoves.isEmpty && aiValidMoves.isEmpty {
+        if noValidMovesForBoth && !playerHandEmpty && !aiHandEmpty {
+            if !deckEmpty {
+                resetTableWithNewCards()
+                return
+            } else if tableEmpty {
+                endRound()
+                return
+            }
+        }
+
+        if deckEmpty && tableEmpty && !playerHandEmpty && !aiHandEmpty {
+            if noValidMovesForBoth {
                 endRound()
                 return
             }
@@ -576,6 +587,28 @@ class GameScene: SKScene {
 
         if deckEmpty && (playerHandEmpty || aiHandEmpty) {
             endRound()
+        }
+    }
+
+    private func resetTableWithNewCards() {
+        let newCards = ["3", "5", "7", "2", "4", "8", "6", "1"]
+
+        tableCardValues.removeAll()
+
+        for _ in 0..<4 {
+            if !deckCards.isEmpty {
+                if let randomCard = newCards.randomElement() {
+                    tableCardValues.append(randomCard)
+                    deckCards.removeFirst()
+                }
+            }
+        }
+
+        isPlayerTurn = !isPlayerTurn
+        drawGame()
+
+        if !isPlayerTurn && !isAnimating {
+            scheduleAITurn()
         }
     }
 
