@@ -351,7 +351,7 @@ class GameScene: SKScene {
 
             if isPlayerTurn {
                 if cardNode.cardId.hasPrefix("hand_") {
-                    let scaleAction = SKAction.scale(to: 1.25, duration: 0.4)
+                    let scaleAction = SKAction.scale(to: 1.12, duration: 0.4)
                     scaleAction.timingMode = .easeInEaseOut
                     cardNode.run(scaleAction)
                 } else if cardNode.cardId.hasPrefix("ai_") {
@@ -365,7 +365,7 @@ class GameScene: SKScene {
                     normalScale.timingMode = .easeInEaseOut
                     cardNode.run(normalScale)
                 } else if cardNode.cardId.hasPrefix("ai_") {
-                    let scaleAction = SKAction.scale(to: 1.25, duration: 0.4)
+                    let scaleAction = SKAction.scale(to: 1.12, duration: 0.4)
                     scaleAction.timingMode = .easeInEaseOut
                     cardNode.run(scaleAction)
                 }
